@@ -1,0 +1,22 @@
+      
+version: '3'
+
+services:
+  db:
+    image: "postgres"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: gestion
+      POSTGRES_USER: zedgres
+      POSTGRES_PASSWORD: zedgres
+  app:
+    build: .
+    ports:
+      - "9000:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db/gestion
+      SPRING_DATASOURCE_USERNAME: zedgres
+      SPRING_DATASOURCE_PASSWORD: zedgres
+    depends_on:
+      - db
